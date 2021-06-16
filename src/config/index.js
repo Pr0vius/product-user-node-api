@@ -18,5 +18,8 @@ module.exports = {
     },
     swagger:{
         path: '/api/documentation'
+    },
+    database:{
+        mongodbURL : process.env.MONGODB_URI || "mongodb://127.0.0.1:27017"
     }
 };
