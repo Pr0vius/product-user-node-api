@@ -1,10 +1,11 @@
+const bcrypt = require('bcrypt');
 const UserModel = require("../models/user.schema");
 
 class UserRepository {
     constructor() {}
 
-    async findAllUsers() {
-        return await UserModel.find();
+    async findAllUsers(filter, options) {
+        return await UserModel.paginate(filter, options);
     }
 
     async findUserById(id) {
@@ -12,6 +13,8 @@ class UserRepository {
     }
 
     async createUser(user) {
+        user.password = await bcrypt.hash(user.password, 10)
+
         return await UserModel.create(user);
     }
 
