@@ -5,19 +5,18 @@ const {
   createUser,
   getUser,
   updateUser,
-  updatePartialUser,
   deleteUser,
 } = require("../controllers/user.controller");
 
 router.route("/")
   .get(getAllUsers)
-  .post(createUser);
-
+  .post(createUser)
+;
 router
   .route("/:id")
   .get(getUser)
-  .put(updateUser)  
-  .patch(updatePartialUser)
-  .delete(deleteUser);
+  .put(updateUser)
+  .delete(deleteUser)
+;
 
 module.exports = router;
