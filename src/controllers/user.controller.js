@@ -1,6 +1,6 @@
 const express = require("express");
 const ErrorResponse = require("../helpers/errorResponse");
-const UserSchema = require('../models/user.schema')
+const User = require('../service/user.service');
 
 
 /**
@@ -11,11 +11,11 @@ const UserSchema = require('../models/user.schema')
  */
 exports.getAllUsers = async(req, res, next) => {
     try {
-        const users = await UserSchema.find()
+        const userList = await User.findAll();
 
         res.status(200).json({
             status: 200,
-            data: users,
+            data: userList,
         });
     } catch (err) {
         next(
@@ -33,8 +33,11 @@ exports.getAllUsers = async(req, res, next) => {
 exports.createUser = async(req, res, next) => {
     try {
         const user = req.body
-        const usr = await UserSchema.create(user)
-        res.status(201).json(usr);
+        const newUser = await User.create(user)
+        res.status(201).json({
+            status: 200,
+            data: newUser
+        });
     } catch (err) {
         next(new ErrorResponse(`Can't create user: ${err.message}`, 400));
     }
@@ -48,7 +51,11 @@ exports.createUser = async(req, res, next) => {
  */
 exports.getUser = (req, res, next) => {
     try {
-        res.json("Get User By Id");
+        const user = User.findOne(req.params.id)
+        res.status(200).json({
+            status: 200,
+            data: user,
+        })
     } catch (err) {
         next(new ErrorResponse(`Can't find the user id: ${err.message}`, 404));
     }
@@ -62,7 +69,11 @@ exports.getUser = (req, res, next) => {
  */
 exports.updateUser = (req, res, next) => {
     try {
-        res.status(201).json("User Updated By Put");
+        const updatedUser = User.update(req.params.id, req.body)
+        res.status(201).json({
+            status: 200,
+            data: updatedUser
+        });
     } catch (err) {
         next(new ErrorResponse(`Can't update user: ${err.message}`, 400));
     }
@@ -74,24 +85,13 @@ exports.updateUser = (req, res, next) => {
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
-exports.updatePartialUser = (req, res, next) => {
-    try {
-        res.status(201).json("User Updated By Patch");
-    } catch (err) {
-        next(new ErrorResponse(`Can't update Partial user: ${err.message}`, 400));
-
-    }
-};
-
-/**
- *
- * @param {express.Request} req
- * @param {express.Response} res
- * @param {express.NextFunction} next
- */
 exports.deleteUser = (req, res, next) => {
     try {
-        res.json("User Deleted");
+        User.remove(req.params.id)
+        res.status(200).json({
+            status: 200,
+            message: `User deleted`
+        });
     } catch (err) {
         next(new ErrorResponse(`Can't delete user: ${err.message}`, 400));
 
