@@ -1,14 +1,22 @@
 const express = require("express");
 const ErrorResponse = require("../helpers/errorResponse");
+const UserSchema = require('../models/user.schema')
+
+
 /**
  *
  * @param {express.Request} req
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
-exports.getAllUsers = (req, res, next) => {
+exports.getAllUsers = async(req, res, next) => {
     try {
-        res.json("Get All Users");
+        const users = await UserSchema.find()
+
+        res.status(200).json({
+            status: 200,
+            data: users,
+        });
     } catch (err) {
         next(
             new ErrorResponse(`Can't find the user list: ${err.message}`, 404)
@@ -22,9 +30,11 @@ exports.getAllUsers = (req, res, next) => {
  * @param {express.Response} res
  * @param {express.NextFunction} next
  */
-exports.createUser = (req, res, next) => {
+exports.createUser = async(req, res, next) => {
     try {
-        res.status(201).json("User Created");
+        const user = req.body
+        const usr = await UserSchema.create(user)
+        res.status(201).json(usr);
     } catch (err) {
         next(new ErrorResponse(`Can't create user: ${err.message}`, 400));
     }

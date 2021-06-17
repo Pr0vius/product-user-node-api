@@ -29,12 +29,13 @@ class ExpressServer {
             res.status(200).end();
         });
 
-        this.app.use(require('../../routes/404.routes'));
-
         this.app.use(
             `${this.basePath}/users`,
             require("../../routes/user.routes")
         );
+        
+        this.app.use(require('../../routes/404.routes'));
+
     }
 
     _swagger() {
