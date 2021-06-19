@@ -15,13 +15,13 @@ class ExpressServer {
         this._middlewares();
         this._swagger();
         this._routes();
+        this._errorhandler();
     }
 
     _middlewares() {
         this.app.use(express.json());
         this.app.use(morgan("tiny"));
         this.app.use(cors());
-        this.app.use(require('../../middlewares/errorHandler'));
     }
 
     _routes() {
@@ -36,6 +36,10 @@ class ExpressServer {
         
         this.app.use(require('../../routes/404.routes'));
 
+    }
+
+    _errorhandler(){
+        this.app.use(require('../../middlewares/errorHandler'))
     }
 
     _swagger() {
