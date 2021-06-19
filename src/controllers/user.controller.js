@@ -1,13 +1,13 @@
-const express = require("express");
+const {Request, Response, NextFunction} = require("express");
 const ErrorResponse = require("../helpers/errorResponse");
 const Success = require("../helpers/successHandler");
 const User = require("../service/user.service");
 
 /**
  *
- * @param {express.Request} req
- * @param {express.Response} res
- * @param {express.NextFunction} next
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
  */
 exports.getAllUsers = async (req, res, next) => {
     try {
@@ -28,9 +28,9 @@ exports.getAllUsers = async (req, res, next) => {
 
 /**
  *
- * @param {express.Request} req
- * @param {express.Response} res
- * @param {express.NextFunction} next
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
  */
 exports.createUser = async (req, res, next) => {
     try {
@@ -56,9 +56,9 @@ exports.createUser = async (req, res, next) => {
 
 /**
  *
- * @param {express.Request} req
- * @param {express.Response} res
- * @param {express.NextFunction} next
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
  */
 exports.getUser = async (req, res, next) => {
     try {
@@ -74,9 +74,9 @@ exports.getUser = async (req, res, next) => {
 
 /**
  *
- * @param {express.Request} req
- * @param {express.Response} res
- * @param {express.NextFunction} next
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
  */
 exports.updateUser = async (req, res, next) => {
     try {
@@ -102,9 +102,9 @@ exports.updateUser = async (req, res, next) => {
 
 /**
  *
- * @param {express.Request} req
- * @param {express.Response} res
- * @param {express.NextFunction} next
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
  */
 exports.deleteUser = async (req, res, next) => {
     try {
