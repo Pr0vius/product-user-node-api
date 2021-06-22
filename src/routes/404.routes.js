@@ -1,8 +1,16 @@
 const { Router } = require("express");
 const router = Router();
 
-router.get('*', (req, res, next) => {
-    res.status(404).json({status:404, message: "Page not Found" });
-});
+const notFount = (req, res, next) => {
+    res.status(404).json({ status: 404, message: "Page not Found" });
+};
+
+router
+    .route("*")
+    .get(notFount)
+    .post(notFount)
+    .put(notFount)
+    .delete(notFount)
+;
 
 module.exports = router;
