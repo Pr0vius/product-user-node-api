@@ -1,5 +1,6 @@
-const { check, validationResult } = require("express-validator");
+const { check } = require("express-validator");
 const ErrorResponse = require("../../helpers/errorResponse");
+const { validResult } = require('../commons');
 const {
     emailExistFunction,
     roleValidFunction,
@@ -46,14 +47,6 @@ const _dateValid = check('birthdate')
     .isDate('MM-DD-YYYY')
 ;
 
-const _validationResult = (req, res, next) => {
-    const err = validationResult(req);
-    if (!err.isEmpty()) {
-        throw new ErrorResponse(`Validation Error`, 400, err.errors);
-    }
-    next();
-};
-
 const _idRequied = check('id')
     .not()
     .isEmpty()
@@ -87,7 +80,7 @@ const postValidations = [
     _passwordRequired,
     _roleValid,
     _dateValid,
-    _validationResult,
+    validResult,
 ];
 
 const putValidations = [
@@ -98,7 +91,7 @@ const putValidations = [
     _dateValid,
     _optionalEmailValid,
     _optionalEmailExist,
-    _validationResult
+    validResult
 ]
 module.exports = {
     postValidations,
