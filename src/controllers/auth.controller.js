@@ -1,13 +1,13 @@
 const ErrorResponse = require("../helpers/errorResponse");
 const Success = require("../helpers/successHandler");
+const authService = require("../service/auth.service");
 
-
-exports.login = (req, res, next) => {
-    const {email, password} = req.body;
+exports.login = async (req, res, next) => {
+    const { email, password } = req.body;
     try {
-
-        res.json(new Success({msj:"ok"}))
+        const user = await authService.login(email, password);
+        res.json(new Success(user));
     } catch (err) {
-        next(new ErrorResponse("Couldn't LogIn", 400, err))
+        next(new ErrorResponse("Couldn't LogIn", 400, err));
     }
 };

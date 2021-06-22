@@ -28,7 +28,6 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Password field is required"],
             min: 6,
-            select: false
         },
         role: {
             type: String,

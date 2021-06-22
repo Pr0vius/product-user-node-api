@@ -21,5 +21,9 @@ module.exports = {
     },
     database:{
         mongodbURL : process.env.MONGODB_URI || "mongodb://127.0.0.1:27017"
+    },
+    webtoken:{
+        secret: process.env.JWT_SECRET,
+        expires: process.env.JWT_EXPIRES
     }
 };
