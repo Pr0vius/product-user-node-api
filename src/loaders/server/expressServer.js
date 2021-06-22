@@ -33,6 +33,11 @@ class ExpressServer {
             `${this.basePath}/users`,
             require("../../routes/user.routes")
         );
+
+        this.app.use(
+            `${this.basePath}/auth`,
+            require('../../routes/auth.routes')
+        )
         
         this.app.use(require('../../routes/404.routes'));
 
