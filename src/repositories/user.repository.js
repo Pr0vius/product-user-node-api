@@ -12,6 +12,10 @@ class UserRepository {
         return await UserModel.findById(id);
     }
 
+    async findUserByEmail(email) {
+        return await UserModel.findOne({email});
+    }
+
     async createUser(user) {
         user.password = await bcrypt.hash(user.password, 10)
 

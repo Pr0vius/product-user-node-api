@@ -4,6 +4,9 @@ const repository = new UserRepository();
 exports.findAll = async (filter, options) => {
     return await repository.findAllUsers(filter, options);
 };
+exports.findByEmail = async (email) => {
+    return await repository.findUserByEmail(email);
+};
 exports.create = async (user) => {
     return repository.createUser(user);
 };

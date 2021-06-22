@@ -1,21 +1,23 @@
 const { Router } = require("express");
 const router = Router();
 const {
-  getAllUsers,
-  createUser,
-  getUser,
-  updateUser,
-  deleteUser,
+    getAllUsers,
+    createUser,
+    getUser,
+    updateUser,
+    deleteUser,
 } = require("../controllers/user.controller");
+const { postValidations, putValidations } = require("../middlewares/request/validations");
 
-router.route("/")
+router
+  .route("/")
   .get(getAllUsers)
-  .post(createUser)
+  .post(postValidations, createUser)
 ;
 router
   .route("/:id")
   .get(getUser)
-  .put(updateUser)
+  .put(putValidations,updateUser)
   .delete(deleteUser)
 ;
 
