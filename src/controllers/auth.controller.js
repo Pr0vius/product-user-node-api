@@ -1,8 +1,9 @@
 const ErrorResponse = require("../helpers/errorResponse");
 const Success = require("../helpers/successHandler");
-const User = require("../service/user.service");
+
 
 exports.login = (req, res, next) => {
+    const {email, password} = req.body;
     try {
 
         res.json(new Success({msj:"ok"}))
