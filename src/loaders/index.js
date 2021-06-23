@@ -2,7 +2,7 @@ require('colors');
 const ExpressServer = require("./server/expressServer");
 const config = require("../config/index");
 const logger = require('./logger/winston.logger');
-const connectDatabase = require('../database/database');
+const connectDatabase = require('./database/database');
 
 module.exports = async () => {
   const server = new ExpressServer();
