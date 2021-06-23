@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const { database } = require("../config/index");
-const logger = require('../loaders/logger/winston.logger');
+const { database } = require("../../config/index");
+const logger = require('../../loaders/logger/winston.logger');
 
 const connectDatabase = async () => {
     try {
