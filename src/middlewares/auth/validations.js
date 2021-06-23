@@ -1,6 +1,7 @@
 const { check } = require('express-validator');
+const ErrorResponse = require('../../helpers/errorResponse');
+const { validateToken } = require('../../service/auth.service');
 const { validResult } = require('../commons');
-// const { validToken, validRole } = require('../../service/user.service');
 
 
 const _emailRequired = check('email', 'Email required').not().isEmpty();
@@ -15,6 +16,18 @@ const loginValidations = [
     validResult
 ]
 
+const validateJWT = async (req,res,next) => {
+    try {
+        const token = req.header("Authorization");
+        const user = await validateToken(token);
+        req.user = user;
+        next()
+    } catch (err) {
+        next(new ErrorResponse("Can't validate the token", 400, err))
+    }
+}
+
 module.exports = {
-    loginValidations
+    loginValidations,
+    validateJWT
 }
