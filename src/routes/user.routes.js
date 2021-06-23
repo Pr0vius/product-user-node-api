@@ -7,18 +7,24 @@ const {
     updateUser,
     deleteUser,
 } = require("../controllers/user.controller");
-const { postValidations, putValidations } = require("../middlewares/request/validations");
+const {
+    getAllUsersValidations,
+    getUserByIdValidations,
+    postUserValidations,
+    putUserValidations,
+    deleteUserValidations,
+} = require("../middlewares/request/validations");
 
 router
   .route("/")
-  .get(getAllUsers)
-  .post(postValidations, createUser)
+  .get(getAllUsersValidations, getAllUsers)
+  .post(postUserValidations, createUser)
 ;
 router
   .route("/:id")
-  .get(getUser)
-  .put(putValidations,updateUser)
-  .delete(deleteUser)
+  .get(getUserByIdValidations, getUser)
+  .put(putUserValidations, updateUser)
+  .delete(deleteUserValidations, deleteUser)
 ;
 
 module.exports = router;

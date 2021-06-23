@@ -18,7 +18,10 @@ const login = async (email, password) => {
 
         // User status Validation
         if (!user.enabled) {
-            throw new ErrorResponse("Authentication failed! User disabled.", 401);
+            throw new ErrorResponse(
+                "Authentication failed! User disabled.",
+                401
+            );
         }
         // Password Validation
         const validPassword = bcrypt.compareSync(password, user.password);
@@ -42,7 +45,7 @@ const login = async (email, password) => {
             username: user.username,
             birthdate: user.birthdate,
             email: user.email,
-            enabled: user.enabled
+            enabled: user.enabled,
         };
     } catch (err) {
         throw new ErrorResponse("Something went wrong", 500, err);
@@ -100,7 +103,19 @@ const validateToken = async (token) => {
     }
 };
 
+const validateRole = (user, ...roles) => {
+    if (!roles.includes(user.role)) {
+        throw new ErrorResponse(
+            "Authorization Failed",
+            403,
+            "Unauthorized user"
+        );
+    }
+    return true;
+};
+
 module.exports = {
     login,
     validateToken,
+    validateRole,
 };
