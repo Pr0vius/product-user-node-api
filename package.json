@@ -1,7 +1,7 @@
 {
-  "name": "node-base-rest-api",
-  "version": "0.0.1",
-  "description": "A simple node rest API",
+  "name": "users-rest-api",
+  "version": "1.0.0",
+  "description": "A users/login ABM",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
